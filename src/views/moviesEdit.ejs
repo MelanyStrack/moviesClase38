@@ -33,7 +33,7 @@
             
             <label for="length">Length </label>
             <p><input type="number" name="length" id="" value="<%= Movie.length %>" required></p>
-            <p><%= locals.errors && errors.release_date ? errors.release_date.msg : null %></p>
+            <p><%= locals.errors && errors.length ? errors.length.msg : null %></p>
             <br>
             <p> <button class="botonAgregar" type="submit">Actualizar</button>
         

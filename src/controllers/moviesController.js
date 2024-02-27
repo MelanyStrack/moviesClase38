@@ -46,23 +46,20 @@ const moviesController = {
        res.render("moviesAdd")
     },
     create: function (req, res) {
-        const {title, rating, number, awards, release_date, length} = req.body
-        const product ={
-            title: title.trim(),
-            rating: rating,
-            awards,
-            release_date,
-            length,
-        };
+        const {title, rating, number, awards, release_date, length, } = req.body
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             res.render("moviesAdd",{errors:errors.mapped(),old:req.body})
         }else{
-            db.Movie.create(product)
-        .then((product)=>{
+            db.Movie.create({
+                title: title.trim(),
+                rating: rating,
+                awards,
+                release_date,
+                length,
+                
+            })
             res.redirect("/movies")
-        })
-        .catch(err=>console.log(err))
         }
         
     },
@@ -91,16 +88,14 @@ const moviesController = {
                 awards,
                 release_date,
                 length,
+                
             },
             {
                 where:{
                     id,
                 }
             })
-            .then((response)=>{
                 res.redirect(`/movies`)
-            })
-            .catch((err) => console.log(err))
         }
         
     },
@@ -118,10 +113,8 @@ const moviesController = {
                 id,
             }
         })
-        .then((response)=>{
             res.redirect("/movies");
-        })
-        .catch((error)=> console.log(error))
+       
     }
 
 }
